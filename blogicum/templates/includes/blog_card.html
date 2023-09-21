@@ -1,0 +1,23 @@
+{% for block in post reversed %}
+<article>
+  <ul>
+    <li>
+      {{ block.location }}              
+    </li>
+    <li>
+      {{ block.date }}
+    </li>
+    <li>
+      Категория: <a href="{% url 'blog:category_posts' block.category %}">{{ block.category }}</a>
+    </li>
+  </ul>          
+  <!-- Первые 10 слов -->
+  <p>
+    {{ block.text|truncatewords:10 }}
+  </p>
+  <a href="{% url 'blog:post_detail' block.id %}">Читать полный текст</a>
+</article>
+{% if not forloop.last %}
+<hr>
+{% endif %}
+{% endfor %}
