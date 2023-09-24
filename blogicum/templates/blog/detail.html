@@ -2,20 +2,5 @@
 
 {% block title %}{{ post.date }}. {{ post.location }}{% endblock %}
 {%block content%}
-  <article>
-    <ul>
-      <li>
-        {{ post.location }}              
-      </li>
-      <li>
-        {{ post.date }}
-      </li>
-      <li>
-        Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
-      </li>
-    </ul>         
-    <p>
-      {{ post.text|linebreaks }}
-    </p>          
-  </article>
+  {% include 'includes/blog/blog_card.html' %}
 {% endblock %}
