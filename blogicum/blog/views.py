@@ -60,4 +60,5 @@ def post_detail(request, post_id):
     if post_id >= len(posts) or post_id < 0:
         raise Http404('Page not found')
     template = 'blog/detail.html'
-    return render(request, template, {'post': posts[post_id]})
+    id_synchronized_posts = {post['id']: post for post in posts}
+    return render(request, template, {'post': id_synchronized_posts[post_id]})
