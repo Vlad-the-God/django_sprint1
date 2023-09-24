@@ -56,8 +56,8 @@ def category_posts(request, category_slug):
     return render(request, template, {'category': category_slug})
 
 
-def post_detail(request, pk):
-    if pk >= len(posts) or pk < 0:
+def post_detail(request, post_id):
+    if post_id >= len(posts) or post_id < 0:
         raise Http404('Page not found')
     template = 'blog/detail.html'
-    return render(request, template, {'post': posts[pk]})
+    return render(request, template, {'post': posts[post_id]})
