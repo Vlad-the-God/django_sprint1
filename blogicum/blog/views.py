@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 
 
-posts = [
+posts: list[dict] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
