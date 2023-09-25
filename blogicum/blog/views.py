@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import Http404
 
+from typing import Union
 
-posts: list[dict] = [
+
+posts: list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -45,6 +47,8 @@ posts: list[dict] = [
     },
 ]
 
+ID_SYNCHRONIZED_POSTS = {post['id']: post for post in posts}
+
 
 def index(request):
     template = 'blog/index.html'
@@ -57,8 +61,7 @@ def category_posts(request, category_slug):
 
 
 def post_detail(request, post_id):
-    if post_id >= len(posts) or post_id < 0:
+    if post_id not in ID_SYNCHRONIZED_POSTS:
         raise Http404('Page not found')
     template = 'blog/detail.html'
-    id_synchronized_posts = {post['id']: post for post in posts}
-    return render(request, template, {'post': id_synchronized_posts[post_id]})
+    return render(request, template, {'post': ID_SYNCHRONIZED_POSTS[post_id]})
