@@ -47,7 +47,7 @@ posts: list[dict[str, Union[int, str]]] = [
     },
 ]
 
-ID_SYNCHRONIZED_POSTS = {post['id']: post for post in posts}
+POSTS_BY_ID = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -61,7 +61,7 @@ def category_posts(request, category_slug):
 
 
 def post_detail(request, post_id):
-    if post_id not in ID_SYNCHRONIZED_POSTS:
+    if post_id not in POSTS_BY_ID:
         raise Http404('Page not found')
     template = 'blog/detail.html'
-    return render(request, template, {'post': ID_SYNCHRONIZED_POSTS[post_id]})
+    return render(request, template, {'post': POSTS_BY_ID[post_id]})
